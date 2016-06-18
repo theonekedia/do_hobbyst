@@ -72,6 +72,7 @@ app.set('serverUrl', config.server.url)
 var components = require('./components/index')
 
 app.use(function(req, res, next) {
+  console.log('Hello')
   var newUrl = req.url.slice(4)
   req.url = newUrl
   next()

@@ -10,9 +10,9 @@ module.exports = function (app, express, jwtObj, jwtConfig, components, mongoose
   require('./users/usersRoutes')
   (app, express, usersComponents, jwtObj, jwtConfig[0], mongooseOpt)
 
-  require('./players/playersRoutes')
-  (app, express, authsComponents, jwtObj, jwtConfig[0], mongooseOpt)
+  // require('./players/playersRoutes')
+  // (app, express, authsComponents, jwtObj, jwtConfig[0], mongooseOpt)
 
-  require('./events/eventsRoutes')
-  (app, express, authsComponents, jwtObj, jwtConfig[0], mongooseOpt)
+  // require('./events/eventsRoutes')
+  // (app, express, authsComponents, jwtObj, jwtConfig[0], mongooseOpt)
 }
