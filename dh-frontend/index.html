@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]>
+<!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>BetMyFoot</title>
+	<meta name="description" content="Yatri is an Extravagant Event Organizer who will take you out to the places of fun and Adventure.">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	
+	
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="css/base.css"/>
+	<link rel="stylesheet" href="css/skeleton.css"/>
+	<link rel="stylesheet" href="css/layout.css"/>
+	<link rel="stylesheet" href="css/font-awesome.css" />
+	<link rel="stylesheet" href="css/retina.css"/>
+	<link rel="stylesheet" href="css/animsition.min.css"/>
+	
+
+		
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+	
+	
+	
+</head>
+<body>	
+<script>
+if(typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    localStorage.setItem("fn",null);
+    localStorage.setItem("ln",null);
+    localStorage.setItem("em",null);
+    localStorage.setItem("Tok",null);
+} else {
+    // Sorry! No Web Storage support..
+}
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response.authResponse.accessToken);
+      localStorage.setItem('Tok',response.authResponse.accessToken);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+        console.log(response.accessToken);
+        
+      testAPI();
+        
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1296968356996170',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.2' // use version 2.2
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI(res) {
+    var  parseJ; 
+    console.log('Welcome!  Fetching your information.... ');
+      var xhr = new XMLHttpRequest();
+ var accessToken = localStorage.Tok;
+    xhr.onload = function() {
+      parseJ = JSON.parse(xhr.response);
+      console.log(parseJ);
+var http = new XMLHttpRequest();
+var url = "http://yatri.dayofdeal.com/api/login.php";
+/*POSTING URL*/
+var params = "email="+parseJ.email;
+http.open("POST", url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+http.setRequestHeader("Content-length", params.length);
+http.setRequestHeader("Connection", "close");
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+            if(http.response){
+                localStorage.res = http.response;
+            }
+         window.setTimeout(function(){window.location="http://yatri.dayofdeal.com/Yatri/home.html";},2000);
+    }else{
+        var htt = new XMLHttpRequest();
+var url = "http://yatri.dayofdeal.com/api/signup.php";
+//email=cssoliyappan@gmail.com&phone=9876543210&name=soliyappan&pass=76tGHF&social_id=YTR4566
+var params = "email="+parseJ.email+"&phone=9876543210&name="+parseJ.name+"&pass=76tGHF&social_id="+parseJ.id;
+htt.open("POST", url, true);
+
+//Send the proper header information along with the request
+htt.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+htt.setRequestHeader("Content-length", params.length);
+htt.setRequestHeader("Connection", "close");
+
+ if(http.readyState == 4 && http.status == 200) {
+               window.setTimeout(function(){window.location="http://yatri.dayofdeal.com/Yatri/home.html";},2000);
+        
+    }
+        
+htt.send(params);
+        
+    }
+}
+http.send(params);  
+    };
+
+    xhr.open("GET", "https://graph.facebook.com/v2.5/me?fields=id,name,email&access_token="+accessToken);
+    xhr.send();
+    /*FB.api('/me,', function(response) {
+      console.log('Successful login for: ' + response);
+        
+    });*/
+window.location="/home.html";
+        }
+
+</script>
+	<div class="animsition">
+	
+	<!-- MENU
+    ================================================== -->	
+
+		<div id="menu-wrap" class="menu-back cbp-af-header">
+			<div class="container">
+				<div class="sixteen columns">
+					<div class=""></div>
+					<ul class="slimmenu">
+						<li>
+							<a class="active-menu" href="#"></a>
+
+					</ul>
+				</div>
+			</div>
+		</div>	
+		
+	<!-- Primary Page Layout
+	================================================== -->
+	
+	<div class="mk-video-mask"></div>
+		<!-- Video Background - Here you need to replace the videoURL with your youtube video URL -->
+	<a id="bgndVideo" class="player" data-property="{videoURL:'9_jUBQjUhTk',containment:'#home-sec',autoPlay:true, mute:true, startAt:5, opacity:1}"></a>
+	
+	<section class="cd-section">
+		<div class="cd-block">
+			<div class="home-top-video" id="home-sec">	
+		
+			
+				<div class="big-text-top">
+					<div class="flippy">
+						<span class="rotate">Join the Action, Bet on the Best,And WIN the most., Sign in Today</span>
+					</div>
+                    <div class="fb">
+				 <fb:login-button scope="public_profile,email" size="xlarge"
+ onlogin="checkLoginState();">Login With Facebook</fb:login-button></div>
+				</div>
+
+				<div class="small-text" style="color:#fff; text-shadow:2px 2px rgba(0,0,0,0.2);">- Explore the wunderlast in you -</div>
+				
+				<div class="social-top">
+					<ul class="list-social">
+						<li class="icon-soc tipped" data-title="twitter"  data-tipper-options='{"direction":"top","follow":"true"}'>
+							<a href="#">&#xf099;</a>
+						</li>
+						<li class="icon-soc tipped" data-title="facebook"  data-tipper-options='{"direction":"top","follow":"true"}'>
+							<a href="#">&#xf09a;</a>
+						</li>
+						<li class="icon-soc tipped" data-title="github"  data-tipper-options='{"direction":"top","follow":"true"}'>
+							<a href="#">&#xf09b;</a>
+						</li>
+						<li class="icon-soc tipped" data-title="google +"  data-tipper-options='{"direction":"top","follow":"true"}'>
+							<a href="#">&#xf0d5;</a>
+						</li>
+					</ul>	
+				</div>		
+				
+				<a href="#scroll-link" class="scroll scroll-down scroll-yt"></a>
+				
+			</div>
+		</div>
+	</section> <!-- .cd-section -->
+	<nav>
+		<ul class="cd-vertical-nav">
+			<li><a href="#0" class="cd-prev inactive"></a></li>
+			<li><a href="#0" class="cd-next inactive1"></a></li>
+		</ul>
+	</nav> <!-- .cd-vertical-nav -->
+	
+	
+	<footer class="footer">
+		<div class="container">
+			<div class="sixteen columns">
+				<div class="footer-social">
+					<a href="#">twitter</a>
+					<a href="#">github</a>
+					<a href="#">facebook</a>
+					<a href="#">google +</a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="sixteen columns">
+				<div class="footer-copy-text">
+					<p>© We are Pallas. All rights reserved. 2015</p>
+					<p>Made by IG Design in Kraljevo, Serbia</p>
+				</div>
+			</div>
+		</div>
+	</footer> 	
+		
+	</div>	
+
+		
+	<!-- JAVASCRIPT
+    ================================================== -->
+<script type="text/javascript" src="js/jquery.js"></script>	
+<script type="text/javascript" src="js/modernizr.custom.js"></script> 
+<script type="text/javascript" src="js/jquery.animsition.min.js"></script>
+<script type="text/javascript">
+(function($) { "use strict";
+	$(document).ready(function() {
+	  
+	  $(".animsition").animsition({
+	  
+		inClass               :   'zoom-in-sm',
+		outClass              :   'zoom-out-sm',
+		inDuration            :    800,
+		outDuration           :    800,
+		linkElement           :   '.animsition-link', 
+		// e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+		loading               :    true,
+		loadingParentElement  :   'body', //animsition wrapper element
+		loadingClass          :   'animsition-loading',
+		unSupportCss          : [ 'animation-duration',
+								  '-webkit-animation-duration',
+								  '-o-animation-duration'
+								],
+		//"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser. 
+		//The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+		
+		overlay               :   false,
+		
+		overlayClass          :   'animsition-overlay-slide',
+		overlayParentElement  :   'body'
+	  });
+	});  
+})(jQuery);
+</script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<script type="text/javascript" src="js/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="js/classie.js"></script>
+<script type="text/javascript" src="js/cbpAnimatedHeader.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script> 	
+<script type="text/javascript" src="js/scroll.js"></script>	
+<script type="text/javascript" src="js/animated-headline.js"></script>	
+<script type="text/javascript" src="js/jquery.fs.tipper.min.js"></script>	
+<script type="text/javascript" src="js/jquery.simple-text-rotator.js"></script>	
+<script type="text/javascript" src="js/YTPlayer.js"></script> 
+<script type="text/javascript">
+(function($) { "use strict";
+	jQuery(".player").mb_YTPlayer();
+})(jQuery);
+
+/*var xhr = new XMLHttpRequest();
+ var accessToken = "CAASblfo0JEoBACygzyL0SxTpKH397lFbbHdjzPhYFf7619lY3RTdjZCRBjkRmQw5wP5NXucqQPTjMkaT5cgkufpbdvjRQdLObW8fwpFhEJEPSnLpe6nbNw1V4S9v1wkkyHGb8yCbWprTzPYPnqnA0ZBg81iH2Neyhfv0pDCtpMfwsg36CySYbmPRbrHTpNjbnyjYwVkDn0R46y7Vhk";
+    xhr.onload = function() {
+      var parseJ = JSON.parse(xhr.response);
+                          console.log(parseJ);  
+    };
+
+    xhr.open("GET", "https://graph.facebook.com/v2.5/me?fields=id,name,email&access_token="+accessToken);
+    xhr.send();*/
+</script>
+<script type="text/javascript" src="js/custom-home5.js"></script>  	  
+<!-- End Document
+================================================== -->
+</body>
+</html>
