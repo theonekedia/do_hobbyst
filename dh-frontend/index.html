@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="css/font-awesome.css" />
 	<link rel="stylesheet" href="css/retina.css"/>
 	<link rel="stylesheet" href="css/animsition.min.css"/>
+	<link rel="stylesheet" href="css/c3.min.css"/>
 	
 
 		
@@ -40,6 +41,7 @@
 </head>
 <body>	
 <script>
+var  parseJ; 
 if(typeof(Storage) !== "undefined") {
     // Code for localStorage/sessionStorage.
     localStorage.setItem("fn",null);
@@ -124,13 +126,16 @@ if(typeof(Storage) !== "undefined") {
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI(res) {
-    var  parseJ; 
+    
     console.log('Welcome!  Fetching your information.... ');
       var xhr = new XMLHttpRequest();
  var accessToken = localStorage.Tok;
     xhr.onload = function() {
       parseJ = JSON.parse(xhr.response);
-      console.log(parseJ);
+        console.log(parseJ.email);
+    localStorage.fn = parseJ.name;
+    localStorage.setItem('em',parseJ.email);
+    
 var http = new XMLHttpRequest();
 var url = "http://yatri.dayofdeal.com/api/login.php";
 /*POSTING URL*/
@@ -178,7 +183,9 @@ http.send(params);
       console.log('Successful login for: ' + response);
         
     });*/
-window.location="/home.html";
+alert(
+JSON.stringify(parseJ));
+//window.location="/BetmyFoot/pallas%20template/home.html";
         }
 
 </script>
@@ -322,6 +329,9 @@ window.location="/home.html";
 <script type="text/javascript" src="js/jquery.fs.tipper.min.js"></script>	
 <script type="text/javascript" src="js/jquery.simple-text-rotator.js"></script>	
 <script type="text/javascript" src="js/YTPlayer.js"></script> 
+<script type="text/javascript" src="js/d3.js"></script> 
+<script type="text/javascript" src="js/d3.min.js"></script> 
+<script type="text/javascript" src="js/c3.min.js"></script> 
 <script type="text/javascript">
 (function($) { "use strict";
 	jQuery(".player").mb_YTPlayer();
