@@ -4,10 +4,10 @@
 
 module.exports = function (app, express, jwtObj, jwtConfig, components, mongooseOpt) {
 
-  // Auths
-  var authsComponents = new components.authsComponents('authsComponents')
+  // Users
+  var usersComponents = new components.usersComponents('usersComponents')
 
-  require('./auths/authsRoutes')
-  (app, express, authsComponents, jwtObj, jwtConfig[0], mongooseOpt)
+  require('./users/usersRoutes')
+  (app, express, usersComponents, jwtObj, jwtConfig[0], mongooseOpt)
 
 }

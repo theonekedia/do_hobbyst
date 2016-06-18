@@ -21,10 +21,7 @@ var usersSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    trim: true,
-    unique: true,
-    dropDups: true
+    default: null
   },
   points: {
     type: Number,
