@@ -18,7 +18,7 @@
     "express": "^4.14.0",
     "jsonwebtoken": "^5.7.0",
     "mongodb": "^2.1.18",
-    "mongoose": "^4.4.3",
+    "mongoose": "4.4.3",
     "node-uuid": "^1.4.7",
     "path": "^0.12.7",
     "timsort": "^0.2.1"
