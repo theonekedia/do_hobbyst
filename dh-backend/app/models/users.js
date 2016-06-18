@@ -26,6 +26,10 @@ var usersSchema = new Schema({
     unique: true,
     dropDups: true
   },
+  points: {
+    type: Number,
+    required: true
+  },
   bids: [new Schema({
     eventsId: {
       type: String,
