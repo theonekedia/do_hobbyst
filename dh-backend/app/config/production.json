@@ -9,5 +9,21 @@
   },
   "db": {
     "uri" : "mongodb://localhost/dohobbyst"
-  }
+  },
+  "jwt": [
+    {
+      "type": "normal",
+      "algorithms": "HS256",
+      "privatekey": "H0m5r21n7u18u19@Key",
+      "iss": "http://localhost:4000",
+      "exp": "864000"
+    },
+    {
+      "type": "admin",
+      "algorithms": "HS256",
+      "privatekey": "H0m5r21n7u18u19@A4m9nKey",
+      "iss": "http://localhost:4000",
+      "exp": "864000"
+    }
+  ]
 }
