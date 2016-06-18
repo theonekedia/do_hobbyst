@@ -1,0 +1,13 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 4000,
+    "url": "http://127.0.0.1:4000/"
+  },
+  "frontServer": {
+    "url": "http://localhost:3000/"
+  },
+  "db": {
+    "uri" : "mongodb://localhost/dohobbyst"
+  }
+}

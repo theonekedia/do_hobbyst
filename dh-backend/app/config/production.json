@@ -1,0 +1,13 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 4000,
+    "url": "http://localhost:4000/"
+  },
+  "frontServer": {
+    "url": "https://www.profootballgurus.com"
+  },
+  "db": {
+    "uri" : "mongodb://localhost/dohobbyst"
+  }
+}
