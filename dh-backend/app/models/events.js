@@ -10,11 +10,12 @@ var eventsSchema = new Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
   startTime: {
     type: Date,
-    required: true,
+    required: true
   },
   endTime: {
     type: Date,

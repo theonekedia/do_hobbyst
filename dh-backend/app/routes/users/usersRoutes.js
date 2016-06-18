@@ -9,7 +9,7 @@ module.exports = function (app, express, usersComponents, jwtObj, jwtConfig, mon
   usersRouter.post('/', function(req, res) {
 
     var userData = {}
-
+    // console.log(req.body.email)
     userData.email = req.body.email
     userData.name = req.body.name
 
@@ -29,5 +29,5 @@ module.exports = function (app, express, usersComponents, jwtObj, jwtConfig, mon
     })
   })
 
-  app.use('/auths', usersRouter)
+  app.use('/users', usersRouter)
 }

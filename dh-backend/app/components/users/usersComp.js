@@ -31,6 +31,9 @@ class usersComp {
 
       return returnObj
     })
+    .catch(function(err) {
+      console.log(err)
+    })
   }
 }
 

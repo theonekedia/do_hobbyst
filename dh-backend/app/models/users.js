@@ -25,7 +25,7 @@ var usersSchema = new Schema({
   },
   points: {
     type: Number,
-    required: true
+    default: 0
   },
   bids: [new Schema({
     eventsId: {
