@@ -91,15 +91,18 @@ class usersComp {
           status: 'n'
         }
 
-        usersModel.findByIdAndUpdate(usersId, {
+        // console.log(usersData.bids)
+        usersData.bids.push(userBidsObj)
+        return usersModel.findByIdAndUpdate(usersId, {
           $set: {
             points: usersData.points - bidPoints,
-            bids: usersData.bids.push(userBidsObj)
+            bids: usersData.bids
           }
         })
         .then(function(usersPointsData) {
+          // console.log(usersPointsData)
           returnObj.status = 'OK'
-          returnObj.data = usersData
+          returnObj.data = 'user bid saved'
           returnObj.error = ''
 
           return returnObj
