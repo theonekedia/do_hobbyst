@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]>
+<!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>BetMyFoot</title>
+	<meta name="description" content="Yatri is an Extravagant Event Organizer who will take you out to the places of fun and Adventure.">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	
+	
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="css/base.css"/>
+	<link rel="stylesheet" href="css/skeleton.css"/>
+	<link rel="stylesheet" href="css/layout.css"/>
+	<link rel="stylesheet" href="css/font-awesome.css" />
+	<link rel="stylesheet" href="css/retina.css"/>
+	<link rel="stylesheet" href="css/animsition.min.css"/>
+    <link rel="stylesheet" href="css/c3.min.css"/>
+	
+	
+
+		
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+	
+	
+	
+</head>
+<body>	
+<script type="application/javascript">
+var E,A,B,T;
+var xml = new XMLHttpRequest();   // new HttpRequest instance 
+xml.open("GET", "http://192.173.2.120:4000/api/events/live");
+xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xml.onreadystatechange = function(){
+    if(xml.readyState == 4 && xml.status == 200){
+        E=JSON.parse(xml.response);
+        A = E[0].teamA;
+        B= E[0].teamB;
+        localStorage.setItem('Eid',E[0]._id);
+        localStorage.setItem('En',E[0].name);
+        var xm = new XMLHttpRequest();   // new HttpRequest instance 
+xm.open("GET", "http://192.173.2.120:4000/api/bids/events?eventsId="+E[0]._id);
+xm.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xm.onreadystatechange = function(){
+    if(xm.readyState == 4 && xm.status == 200){
+        bid=JSON.parse(xm.response);
+        console.log(bid);
+        localStorage.setItem('bidQ',bid[0].ques);
+        localStorage.setItem('bid',bid[0]._id);
+        document.getElementById('ques').innerHTML = bid[0].ques;
+}
+}
+xm.send();
+}
+}
+xml.send();
+
+
+var xhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xhttp.open("GET", "http://192.173.2.120:4000/api/teams/all");
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.onreadystatechange = function(){
+    if(xhttp.readyState == 4 && xhttp.status == 200){
+        T= JSON.parse(xhttp.response);
+        for(i=0;i<T.length;i++){
+            if(T[i]._id === A) A = T[i];
+            if(T[i]._id === B) B = T[i];
+        }
+        document.getElementById('teamA').style.backgroundImage="url(\'"+A.flagPic+"\')";
+        document.getElementById('teamB').style.backgroundImage="url(\'"+B.flagPic+"\')";
+        localStorage.setItem('An',A.name);
+        localStorage.setItem('Bn',B.name);
+
+}
+}
+xhttp.send();
+
+</script>
+	<div class="animsition">
+	
+	<!-- MENU
+    ================================================== -->	
+
+		<div id="menu-wrap" class="menu-back cbp-af-header">
+			<div class="container">
+				<div class="sixteen columns">
+					<div class=""></div>
+					<ul class="slimmenu">
+						<li>
+                            <a class="active-menu" style="font-size:18px;"  href="#"><span class="icon-money" id="points"></span></a></li>
+						<li>
+                             <a class="active-menu" id="user_name" style="font-size:18px;"   href="#"><span class="icon-user" id="user_name"></span></li>
+
+					</ul>
+				</div>
+			</div>
+		</div>	
+		<script type="application/javascript">
+
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("GET", "http://192.173.2.120:4000/api/users?email="+localStorage.em);
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.onreadystatechange = function(){
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+        console.log(xmlhttp.response);
+        parse = JSON.parse(xmlhttp.response);
+        localStorage.setItem('UID',parse._id);
+        document.getElementById('points').innerHTML = parse.points;
+        document.getElementById('user_name').innerHTML = parse.name;
+}
+}
+xmlhttp.send();
+
+
+
+</script>
+	<!-- Primary Page Layout
+	================================================== -->
+	
+
+	
+<section class="cd-section">
+		<div class="cd-block">
+		
+		<div class="big-text-top">
+            <h3 id="ques">Pick a team</h3><span>?</span>
+			<div class="container">
+                     
+                        <!--div class="sixteen columns">
+				            <div class="section-header-text-left">
+					           <h4>Latest Game<span>.</span></h4> 
+					           <p>Bid NOW.</p> 
+					           <div class="line-header"></div>
+				            </div>
+			             </div-->	
+                        <div class="one-third column" id="teamA" ></div>
+                        <div class="one-third column"><div id="chart"></div></div>
+                        
+                        <div class="one-third column" id="teamB"></div></div>
+                        
+                    </div>
+            </div>
+        
+    
+	</section> <!-- .cd-section>
+    
+	<nav>
+		<ul class="cd-vertical-nav">
+			<li><a href="#0" class="cd-prev inactive"></a></li>
+			<li><a href="#0" class="cd-next inactive1"></a></li>
+		</ul>
+	</nav> <!-- .cd-vertical-nav -->
+	
+	
+	<footer class="footer">
+		<div class="container">
+			<div class="sixteen columns">
+				<div class="footer-social">
+					<a href="#">twitter</a>
+					<a href="#">github</a>
+					<a href="#">facebook</a>
+					<a href="#">google +</a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="sixteen columns">
+				<div class="footer-copy-text">
+					<p>© We are Pallas. All rights reserved. 2015</p>
+					<p>Made by IG Design in Kraljevo, Serbia</p>
+				</div>
+			</div>
+		</div>
+	</footer> 	
+		
+	</div>	
+
+		
+	<!-- JAVASCRIPT
+    ================================================== -->
+<script type="text/javascript" src="js/jquery.js"></script>	
+<script type="text/javascript" src="js/modernizr.custom.js"></script> 
+<script type="text/javascript" src="js/jquery.animsition.min.js"></script>
+<script type="text/javascript">
+(function($) { "use strict";
+	$(document).ready(function() {
+	  
+	  $(".animsition").animsition({
+	  
+		inClass               :   'zoom-in-sm',
+		outClass              :   'zoom-out-sm',
+		inDuration            :    800,
+		outDuration           :    800,
+		linkElement           :   '.animsition-link', 
+		// e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+		loading               :    true,
+		loadingParentElement  :   'body', //animsition wrapper element
+		loadingClass          :   'animsition-loading',
+		unSupportCss          : [ 'animation-duration',
+								  '-webkit-animation-duration',
+								  '-o-animation-duration'
+								],
+		//"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser. 
+		//The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+		
+		overlay               :   false,
+		
+		overlayClass          :   'animsition-overlay-slide',
+		overlayParentElement  :   'body'
+	  });
+	});  
+})(jQuery);
+</script>
+<script type="text/javascript" src="js/jquery.easing.js"></script>
+<script type="text/javascript" src="js/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="js/classie.js"></script>
+<script type="text/javascript" src="js/cbpAnimatedHeader.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script> 	
+<script type="text/javascript" src="js/scroll.js"></script>	
+<script type="text/javascript" src="js/animated-headline.js"></script>	
+<script type="text/javascript" src="js/jquery.simple-text-rotator.js"></script>	
+    <script type="text/javascript" src="js/d3.js"></script> 
+<script type="text/javascript" src="js/d3.min.js"></script> 
+<script type="text/javascript" src="js/c3.min.js"></script> 
+
+<script type="text/javascript">
+    An = localStorage.An;
+    Bn = localStorage.Bn;
+    var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: [
+            [An, 30],
+            [Bn, 120],
+        ],
+        type : 'donut',
+        onclick: function (d, i) { console.log("onclick", d, i); },
+        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+    },
+    donut: {
+        title: localStorage.En
+    }
+});
+    
+
+/*var xhr = new XMLHttpRequest();
+ var accessToken = "CAASblfo0JEoBACygzyL0SxTpKH397lFbbHdjzPhYFf7619lY3RTdjZCRBjkRmQw5wP5NXucqQPTjMkaT5cgkufpbdvjRQdLObW8fwpFhEJEPSnLpe6nbNw1V4S9v1wkkyHGb8yCbWprTzPYPnqnA0ZBg81iH2Neyhfv0pDCtpMfwsg36CySYbmPRbrHTpNjbnyjYwVkDn0R46y7Vhk";
+    xhr.onload = function() {
+      var parseJ = JSON.parse(xhr.response);
+                          console.log(parseJ);  
+    };
+
+    xhr.open("GET", "https://graph.facebook.com/v2.5/me?fields=id,name,email&access_token="+accessToken);
+    xhr.send();*/
+
+</script>
+<script type="text/javascript" src="js/custom-home5.js"></script> 
+<script type="application/javascript">
+var tA = document.getElementById('teamA');
+var tB = document.getElementById('teamB');
+tA.addEventListener('click',function(e){
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", "http://192.173.2.120:4000/api/bids");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.onreadystatechange = function(){
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+        console.log(xmlhttp.response);
+        parse = JSON.parse(xmlhttp.response);
+        document.getElementById('points').innerHTML = parse.points;
+        document.getElementById('user_name').innerHTML = parse.name;
+}
+}
+xmlhttp.send(JSON.stringify({bidsId:localStorage.bid,eventsId:localStorage.Eid,usersId:localStorage.UID,opinion:'A',bidPoints:10}));
+
+},true);
+</script> 	  
+<!-- End Document
+================================================== -->
+</body>
+</html>
