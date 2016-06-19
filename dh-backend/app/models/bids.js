@@ -12,6 +12,10 @@ var bidsSchema = new Schema({
     required: true,
     trim: true
   },
+  ans: {
+    type: String,
+    default: null
+  },
   eventsId: {
     type: String,
     required: true
@@ -19,11 +23,11 @@ var bidsSchema = new Schema({
   users: [new Schema({
     usersId: {
       type: String,
-      required: true
+      default: null
     },
     bet: {
-      type: Number,
-      required: true
+      type: String,
+      default: null
     }
   }, {
     _id: false

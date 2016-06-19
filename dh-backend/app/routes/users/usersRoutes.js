@@ -20,6 +20,24 @@ module.exports = function (app, express, usersComponents, jwtObj, jwtConfig, mon
       if(usersData.status === 'OK') {
         res.status(200).send(usersData.data)
       } else if(usersData.status === 'ERR') {
+        res.status(200).send(usersData.error)
+      }
+    })
+
+    usersStatus.onReject(function(err) {
+      res.status(400).send('something went wrong')
+    })
+  })
+
+  usersRouter.get('/', function(req, res) {
+
+    var usersStatus = usersComponents.getUser(req.query.email)
+
+    usersStatus.onFulfill(function(usersData) {
+
+      if(usersData.status === 'OK') {
+        res.status(200).send(usersData.data)
+      } else if(usersData.status === 'ERR') {
         res.status(404).send('credentials error')
       }
     })

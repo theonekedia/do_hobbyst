@@ -35,6 +35,10 @@ var usersSchema = new Schema({
     bidId: {
       type: String,
       required: true
+    },
+    status: {
+      type: String,
+      required: true
     }
   }, {
     _id: false
@@ -47,7 +51,7 @@ var usersSchema = new Schema({
   })
 
 // Now we create a model for the above schema
-var Users = mongoose.model('Teams', usersSchema)
+var Users = mongoose.model('Users', usersSchema)
 
 // make this available to our Node applications
 module.exports = Users

@@ -72,7 +72,7 @@ app.set('serverUrl', config.server.url)
 var components = require('./components/index')
 
 app.use(function(req, res, next) {
-  console.log('Hello')
+  // console.log('Hello')
   var newUrl = req.url.slice(4)
   req.url = newUrl
   next()
@@ -119,7 +119,7 @@ var env = process.env.NODE_ENV || 'development'
 
 app.listen(app.get('serverPort'), function () {
   // Server and mode info
-  console.log('The homerungurus backend running on server: '
+  console.log('The dohobbyst backend running on server: '
               + app.get('serverHost')
               + ' and the port is: '
               + app.get('serverPort'))
