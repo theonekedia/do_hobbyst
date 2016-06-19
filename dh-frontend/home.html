@@ -80,7 +80,7 @@ xhttp.onreadystatechange = function(){
         T= JSON.parse(xhttp.response);
         console.log(localStorage.Ai+"  "+localStorage.Bi);
         for(i=0;i<T.length;i++){
-          console.log(T[i]);
+          console.log(T[i]._id);
             if(T[i]._id === localStorage.Ai){A = T[i]; console.log(A);}
             if(T[i]._id === localStorage.Bi){B = T[i];console.log(B);}
         }
