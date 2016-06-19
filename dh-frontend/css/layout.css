@@ -47,6 +47,12 @@
 	transition : all 0.3s ease-out;
 }
 
+#teamA, #teamB{
+background-size: cover;
+min-height: 300px;
+min-width: 200px;
+padding: 50px;
+}
 
 .cbp-af-header {
 	-webkit-transition : all 0.3s ease-out;

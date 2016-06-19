@@ -153,25 +153,6 @@ http.onreadystatechange = function() {//Call a function when the state changes.
                 localStorage.res = http.response;
             }
          window.setTimeout(function(){window.location="http://yatri.dayofdeal.com/Yatri/home.html";},2000);
-    }else{
-        var htt = new XMLHttpRequest();
-var url = "http://yatri.dayofdeal.com/api/signup.php";
-//email=cssoliyappan@gmail.com&phone=9876543210&name=soliyappan&pass=76tGHF&social_id=YTR4566
-var params = "email="+parseJ.email+"&phone=9876543210&name="+parseJ.name+"&pass=76tGHF&social_id="+parseJ.id;
-htt.open("POST", url, true);
-
-//Send the proper header information along with the request
-htt.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-htt.setRequestHeader("Content-length", params.length);
-htt.setRequestHeader("Connection", "close");
-
- if(http.readyState == 4 && http.status == 200) {
-               window.setTimeout(function(){window.location="http://yatri.dayofdeal.com/Yatri/home.html";},2000);
-        
-    }
-        
-htt.send(params);
-        
     }
 }
 http.send(params);  
@@ -182,10 +163,22 @@ http.send(params);
     /*FB.api('/me,', function(response) {
       console.log('Successful login for: ' + response);
         
-    });*/
+    });
 alert(
-JSON.stringify(parseJ));
+JSON.stringify(parseJ));*/
 //window.location="/BetmyFoot/pallas%20template/home.html";
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", "http://192.173.2.120:4000/api/users");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.onreadystatechange = function(){
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+  localStorage.setItem('em',parseJ.email);
+  localStorage.setItem('points',1000);
+       window.location="/home.html";
+}
+}
+xmlhttp.send(JSON.stringify({email:parseJ.email,name:parseJ.name,points:1000}));
+ 
         }
 
 </script>
