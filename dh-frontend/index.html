@@ -168,7 +168,7 @@ alert(
 JSON.stringify(parseJ));*/
 //window.location="/BetmyFoot/pallas%20template/home.html";
 var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-xmlhttp.open("POST", "http://192.173.2.120:4000/api/users");
+xmlhttp.open("POST", "http://192.173.2.120/api/users");
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.onreadystatechange = function(){
     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
