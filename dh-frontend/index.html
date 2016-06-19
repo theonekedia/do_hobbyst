@@ -41,7 +41,8 @@
 </head>
 <body>	
 <script>
-var  parseJ; 
+var  parseJ;
+var localhost = 'http://139.59.12.22/';
 if(typeof(Storage) !== "undefined") {
     // Code for localStorage/sessionStorage.
     localStorage.setItem("fn",null);
@@ -168,7 +169,7 @@ alert(
 JSON.stringify(parseJ));*/
 //window.location="/BetmyFoot/pallas%20template/home.html";
 var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-xmlhttp.open("POST", "http://192.173.2.120/api/users");
+xmlhttp.open("POST", localhost+"api/users");
 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp.onreadystatechange = function(){
     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
