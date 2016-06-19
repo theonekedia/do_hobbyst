@@ -78,7 +78,7 @@ xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
         T= JSON.parse(xhttp.response);
-        console.log(T);
+        console.log(A+"  "+B);
         for(i=0;i<T.length;i++){
             if(T[i]._id === A) A = T[i];
             if(T[i]._id === B) B = T[i];
