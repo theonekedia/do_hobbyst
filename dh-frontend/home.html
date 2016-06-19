@@ -139,8 +139,10 @@ xmlhttp.send();
 	
 <section class="cd-section">
 		<div class="cd-block">
-		
 		<div class="big-text-top">
+             <center style="margin-top:-70px;">Bid points:<input id="pts" style='width:40px;height:40px;'  type="number"min="10" max="100" step="10" value="10"  ></input></center><div id="dis"></div><div class="clear"></div>
+
+
             <h3 id="ques">Pick a team</h3><span>?</span>
 			<div class="container">
                      
@@ -277,6 +279,8 @@ xmlhttp.send();
 <script type="application/javascript">
 var tA = document.getElementById('teamA');
 var tB = document.getElementById('teamB');
+var pt = document.getElementById('pts').value;
+console.log(pt);
 tA.addEventListener('click',function(e){
 var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 xmlhttp.open("POST", localhost+"api/bids");
@@ -285,14 +289,28 @@ xmlhttp.onreadystatechange = function(){
     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
         console.log(xmlhttp.response);
         parse = JSON.parse(xmlhttp.response);
-        document.getElementById('points').innerHTML = parse.points;
-        document.getElementById('user_name').innerHTML = parse.name;
+        tB.style.backgroundColor = 'white';
 }
 }
-xmlhttp.send(JSON.stringify({bidsId:localStorage.bid,eventsId:localStorage.Eid,usersId:localStorage.UID,opinion:'A',bidPoints:10}));
+xmlhttp.send(JSON.stringify({bidsId:localStorage.bid,eventsId:localStorage.Eid,usersId:localStorage.UID,opinion:'A',bidPoints:pt}));
 
 },true);
-</script> 	  
+tB.addEventListener('click',function(e){
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", localhost+"api/bids");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.onreadystatechange = function(){
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+        console.log(xmlhttp.response);
+        parse = JSON.parse(xmlhttp.response);
+        tA.style.backgroundColor = 'white';
+}
+}
+xmlhttp.send(JSON.stringify({bidsId:localStorage.bid,eventsId:localStorage.Eid,usersId:localStorage.UID,opinion:'B',bidPoints:pt}));
+
+},true);
+</script> 	
+
 <!-- End Document
 ================================================== -->
 </body>
