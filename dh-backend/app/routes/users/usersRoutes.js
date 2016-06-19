@@ -12,6 +12,7 @@ module.exports = function (app, express, usersComponents, jwtObj, jwtConfig, mon
     // console.log(req.body.email)
     userData.email = req.body.email
     userData.name = req.body.name
+    userData.points = req.body.points
 
     var usersStatus = usersComponents.saveUser(userData)
 
