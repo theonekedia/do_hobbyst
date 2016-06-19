@@ -45,7 +45,7 @@
 var E,A,B,T;
 var localhost = 'http://139.59.12.22/';
 var xml = new XMLHttpRequest();   // new HttpRequest instance 
-xml.open("GET", localhost+"api/events/live");
+xml.open("GET", localhost+"api/events/live",false);
 xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xml.onreadystatechange = function(){
     if(xml.readyState == 4 && xml.status == 200){
@@ -55,7 +55,7 @@ xml.onreadystatechange = function(){
         localStorage.setItem('Eid',E[0]._id);
         localStorage.setItem('En',E[0].name);
         var xm = new XMLHttpRequest();   // new HttpRequest instance 
-xm.open("GET", localhost+"api/bids/events?eventsId="+localStorage.Eid);
+xm.open("GET", localhost+"api/bids/events?eventsId="+localStorage.Eid,false);
 xm.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xm.onreadystatechange = function(){
     if(xm.readyState == 4 && xm.status == 200){
@@ -73,7 +73,7 @@ xml.send();
 
 
 var xhttp = new XMLHttpRequest();   // new HttpRequest instance 
-xhttp.open("GET", localhost+"api/teams/all");
+xhttp.open("GET", localhost+"api/teams/all",false);
 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
