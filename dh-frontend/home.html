@@ -50,8 +50,8 @@ xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xml.onreadystatechange = function(){
     if(xml.readyState == 4 && xml.status == 200){
         E=JSON.parse(xml.response);
-        localStorage.Ai = E[0].teamA;
-        localStorage.Bi = E[0].teamB;
+        A = E[0].teamA;
+        B = E[0].teamB;
         localStorage.setItem('Eid',E[0]._id);
         localStorage.setItem('En',E[0].name);
         var xm = new XMLHttpRequest();   // new HttpRequest instance 
@@ -78,11 +78,11 @@ xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhttp.onreadystatechange = function(){
     if(xhttp.readyState == 4 && xhttp.status == 200){
         T= JSON.parse(xhttp.response);
-        console.log(localStorage.Ai+"  "+localStorage.Bi);
+        //console.log(localStorage.Ai+"  "+localStorage.Bi);
         for(i=0;i<T.length;i++){
           console.log(T[i]._id);
-            if(T[i]._id === localStorage.Ai){A = T[i]; console.log(A);}
-            if(T[i]._id === localStorage.Bi){B = T[i];console.log(B);}
+            if(T[i]._id === A){A = T[i]; console.log(A);}
+            if(T[i]._id === B){B = T[i];console.log(B);}
         }
         document.getElementById('teamA').style.backgroundImage="url(\'"+A.flagPic+"\')";
         document.getElementById('teamB').style.backgroundImage="url(\'"+B.flagPic+"\')";
